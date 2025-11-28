@@ -17,7 +17,6 @@ public class Queue<queueType>
 		front = 0;
 		back = 0;
 	}
-
 	public queueType DeQueue()
 	{
 		queueType output = arrayUsedInQueue[front];
