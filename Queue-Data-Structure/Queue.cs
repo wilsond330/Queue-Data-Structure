@@ -1,11 +1,11 @@
 ﻿using System;
 
-public class Queue
+public class Queue<queueType>
 {
 	private int MAX_SIZE;
 	private bool isEmpty;
 	private bool isFull;
-	private int[] arrayUsedInQueue;
+	private queueType[] arrayUsedInQueue;
 	private int front;
 	private int back;
 	public Queue(int maxSize)
@@ -13,26 +13,26 @@ public class Queue
 		this.MAX_SIZE = maxSize;
 		this.isEmpty = true;
 		this.isFull = false;
-		arrayUsedInQueue = new int[MAX_SIZE];
+		arrayUsedInQueue = new queueType[MAX_SIZE];
 		front = 0;
 		back = 0;
 	}
 
-	public int DeQueue()
+	public queueType DeQueue()
 	{
-		int output = arrayUsedInQueue[front];
+		queueType output = arrayUsedInQueue[front];
 		isFull = false;
-		front = (front % MAX_SIZE) + 1;
+		front = (front + 1) % MAX_SIZE;
 		if (front == back)
 		{
 			isEmpty = true;
 		}
 		return output;
 	}
-	public void EnQueue(int input)
+	public void EnQueue(queueType input)
 	{
 		arrayUsedInQueue[back] = input;
-		back = (back % MAX_SIZE) + 1;
+		back = (back + 1) % MAX_SIZE;
 		isEmpty = false;
 		if (front == back)
 		{
