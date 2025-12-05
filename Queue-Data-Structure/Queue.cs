@@ -17,26 +17,46 @@ public class Queue<queueType>
 		front = 0;
 		back = 0;
 	}
-	public queueType DeQueue()
+	public (queueType, bool) DeQueue()
 	{
-		queueType output = arrayUsedInQueue[front];
-		isFull = false;
-		front = (front + 1) % MAX_SIZE;
-		if (front == back)
+		bool successful = false;
+		queueType output = default(queueType);
+        if (!isEmpty)
+        {
+            output = arrayUsedInQueue[front];
+            isFull = false;
+            front = (front + 1) % MAX_SIZE;
+            if (front == back)
+            {
+                isEmpty = true;
+            }
+            successful = true;
+        }
+		else
 		{
-			isEmpty = true;
+			successful = false;
 		}
-		return output;
+		return (output, successful);
 	}
-	public void EnQueue(queueType input)
+	public bool EnQueue(queueType input)
 	{
-		arrayUsedInQueue[back] = input;
-		back = (back + 1) % MAX_SIZE;
-		isEmpty = false;
-		if (front == back)
+		bool successful;
+		if (!isFull)
 		{
-			isFull = true;
+            arrayUsedInQueue[back] = input;
+            back = (back + 1) % MAX_SIZE;
+            isEmpty = false;
+            if (front == back)
+            {
+                isFull = true;
+            }
+			successful = true;
+        }
+		else
+		{
+			successful = false;
 		}
+		return successful;
 	}
 	public bool IsEmpty()
 	{
